@@ -1,0 +1,16 @@
+app:
+  name: mlservice
+  port: 8081
+
+deployment:
+  replicas: 1
+  image:
+    repository: oreasek/mlservice
+    tag: latest
+
+service:
+  type: ClusterIP
+  
+ingress:
+  host: mlservice.com
+

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}
+spec:
+  replicas: {{ .Values.global.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+    spec:
+      containers:
+        - name: mlclient
+          image: "{{ .Values.deployment.image.repository }}:{{ .Values.global.deployment.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.app.port }}
+          env:
+            - name: ML_SERVICE_HOST
+              value: {{ .Values.deployment.env.ML_SERVICE_HOST }}

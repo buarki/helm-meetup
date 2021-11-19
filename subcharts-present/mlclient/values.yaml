@@ -1,0 +1,20 @@
+global:
+  deployment:
+    replicas: 1
+    image:
+      tag: latest
+  service:
+    type: ClusterIP
+
+app:
+  name: mlclient
+  port: 8080
+
+deployment:
+  image:
+    repository: oreasek/mlclient
+  env:
+    ML_SERVICE_HOST: http://mlservice.default.svc.cluster.local:8081
+  
+ingress:
+  host: mlclient.com
